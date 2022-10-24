@@ -16,11 +16,20 @@ class BaseModel:
         and it will be updated every time you change your object
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
 
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        if not kwargs == {}: 
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    setattr(self, key, value)
+
+            self.created_at = datetime.strptime(self.created_at, '%Y-%m-%dT%H:%M:%S.%f')
+            self.updated_at = datetime.strptime(self.updated_at, '%Y-%m-%dT%H:%M:%S.%f')
+
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         """String representation of the instance"""
@@ -40,4 +49,3 @@ class BaseModel:
         res['updated_at'] = res['updated_at'].isoformat()
 
         return res
-        
