@@ -3,6 +3,8 @@
 This module contains the class HBNBCommand
 """
 import cmd
+import models.base_model
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -10,6 +12,83 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = '(hbnb) '
+
+    def do_create(self, line):
+        """ Creates a new instance of BaseModel"""
+
+        line_read = line.split(" ")
+        if line_read == ['']:
+            print("** class name missing **")
+        elif line_read[0] not in ["BaseModel"]:
+            print("** class doesn't exist **")
+        else:
+            b1 = models.base_model.BaseModel()
+            b1.save()
+            print(b1.id)
+    
+    def do_show(self, line):
+        """Prints the string representation of an instance based on the class name and id"""
+
+        line_read = line.split(" ")
+        if line_read == ['']:
+            print("** class name missing **")
+        elif line_read[0] not in ["BaseModel"]:
+            print("** class doesn't exist **")
+        elif len(line_read) < 2:
+            print("** instance id missing **")
+        else:
+            conct = line_read[0] + "." + line_read[1]
+            obj = models.storage._FileStorage__objects[conct]
+            print(obj)
+            
+    def do_destroy(self, line):
+        """Deletes an instance based on the class name and id"""
+
+        line_read = line.split(" ")
+        if line_read == ['']:
+            print("** class name missing **")
+        elif line_read[0] not in ["BaseModel"]:
+            print("** class doesn't exist **")
+        elif len(line_read) < 2:
+            print("** instance id missing **")
+        else:
+            conct = line_read[0] + "." + line_read[1]
+            del models.storage._FileStorage__objects[conct]
+            models.storage.save()
+
+    def do_all(self, line):
+        """Prints all string representation of all instances based or not on the class name"""
+
+        line_read = line.split(" ")
+        if line_read[0] not in ["BaseModel",""]:
+            print("** class doesn't exist **")
+        else:
+            list_to_print = []
+            for key, value in models.storage._FileStorage__objects.items():
+                if value.__class__.__name__ in ['BaseModel'] or line_read == ['']:
+                    list_to_print.append(str(value))
+            print(list_to_print)
+
+    def do_update(self, line):
+        """ Updates an instance based on the class name and id by adding or updating attribute """
+
+        line_read = line.split(' ')
+        if line_read == ['']:
+            print("** class name missing **")
+        elif line_read[0] not in ['BaseModel']:
+            print("** class doesn't exist **")
+        elif len(line_read) < 2:
+            print("** instance id missing **")
+        elif not models.storage._FileStorage__objects.get(conct := line_read[0] + "." + line_read[1]):
+            print("** no instance found **")
+        elif len(line_read) < 3:
+            print("** attribute name missing **")
+        elif len(line_read) < 4:
+            print("** value missing **")
+
+        else:
+            obj = models.storage._FileStorage__objects[conct]
+            setattr(obj, line_read[2], eval(line_read[3]))
 
     def do_EOF(self, line):
         return True
@@ -21,6 +100,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
+    
 
 
 if __name__ == '__main__':
