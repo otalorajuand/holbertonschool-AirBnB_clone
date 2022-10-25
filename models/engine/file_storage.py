@@ -3,6 +3,7 @@
 """
 import json
 import os.path
+from models.base_model import BaseModel
 
 class FileStorage:
 
@@ -24,7 +25,7 @@ class FileStorage:
         """serializes __objects to the JSON file"""
 
         aux_dict = {key: value.to_dict() for key, value in self.all().items()}
-
+ 
 
         with open(FileStorage.__file_path, mode ="w+", encoding="utf-8") as f:
             f.write(json.dumps(aux_dict))
@@ -39,6 +40,5 @@ class FileStorage:
                 str_read = f.read()
             
             python_obj = json.loads(str_read)
-            return {k: eval(f"{v['__class__']}({v})") for k, v in python_obj}
-        return
-        
+            FileStorage.__objects = {k: eval(f"{v['__class__']}({v})")
+                                    for k, v in python_obj.items()}
