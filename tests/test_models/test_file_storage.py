@@ -17,9 +17,8 @@ class TestFileStorage(unittest.TestCase):
         file_1 = FileStorage()
         self.assertTrue(file_1._FileStorage__file_path == 'file.json')
 
-    """
-    def test_objs(self):
 
-        b_1 = BaseModel()
-        self.assertTrue(b_1 in models.storage.all())
-    """
+    def test_all(self):
+
+        file_1 = FileStorage()
+        self.assertTrue(file_1._FileStorage__objects == file_1.all())
