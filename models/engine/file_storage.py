@@ -40,5 +40,5 @@ class FileStorage:
                 str_read = f.read()
             
             python_obj = json.loads(str_read)
-            FileStorage.__objects = {k: eval(f"{v['__class__']}({v})")
+            FileStorage.__objects = {k: eval(f"{v['__class__']}(**{v})")
                                     for k, v in python_obj.items()}
