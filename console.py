@@ -36,8 +36,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-        else:
-            conct = line_read[0] + "." + line_read[1]
+        elif models.storage._FileStorage__objects.get(conct := line_read[0] + "." + line_read[1]):
             obj = models.storage._FileStorage__objects[conct]
             print(obj)
             
@@ -51,8 +50,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-        else:
-            conct = line_read[0] + "." + line_read[1]
+
+        elif models.storage._FileStorage__objects.get(conct := line_read[0] + "." + line_read[1]):
             del models.storage._FileStorage__objects[conct]
             models.storage.save()
 
