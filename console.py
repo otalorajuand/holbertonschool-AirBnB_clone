@@ -3,7 +3,6 @@
 This module contains the class HBNBCommand
 """
 import cmd
-import readline
 
 
 class HBNBCommand(cmd.Cmd):
@@ -11,6 +10,9 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = '(hbnb) '
+
+    def do_EOF(self, line):
+        return True
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
