@@ -9,7 +9,7 @@ from datetime import datetime
 import os
 
 
-class TestBase(unittest.TestCase):
+class TestFileStorage(unittest.TestCase):
 
     def test_file_path(self):
 
