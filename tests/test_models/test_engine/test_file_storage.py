@@ -34,5 +34,15 @@ class TestFileStorage(unittest.TestCase):
 
         obj_1 = BaseModel()
         file_1 = FileStorage()
-        obj_1.save()
+        file_1.save()
         self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
+
+    def test_reload(self):
+
+        file_1 = FileStorage()
+        obj_1 = BaseModel()
+        file_1.save()
+        file_1._FileStorge__objects = {}
+        file_1.reload()
+        self.assertTrue(file_1._FileStorage__objects)
+
