@@ -5,6 +5,7 @@ This module contains the class HBNBCommand
 import cmd
 import models.base_model
 import models
+import models.user
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ["BaseModel"]:
+        elif line_read[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
         else:
             b1 = models.base_model.BaseModel()
@@ -32,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ["BaseModel"]:
+        elif line_read[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
@@ -48,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ["BaseModel"]:
+        elif line_read[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
@@ -63,12 +64,12 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances based or not on the class name"""
 
         line_read = line.split(" ")
-        if line_read[0] not in ["BaseModel",""]:
+        if line_read[0] not in ["BaseModel","", "User"]:
             print("** class doesn't exist **")
         else:
             list_to_print = []
             for key, value in models.storage._FileStorage__objects.items():
-                if value.__class__.__name__ in ['BaseModel'] or line_read == ['']:
+                if value.__class__.__name__ in ['BaseModel', "User"] or line_read == ['']:
                     list_to_print.append(str(value))
             print(list_to_print)
 
@@ -78,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(' ')
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ['BaseModel']:
+        elif line_read[0] not in ['BaseModel', "User"]:
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
