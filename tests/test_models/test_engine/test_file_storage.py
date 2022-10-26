@@ -17,7 +17,6 @@ class TestFileStorage(unittest.TestCase):
         file_1 = FileStorage()
         self.assertTrue(file_1._FileStorage__file_path == 'file.json')
 
-
     def test_all(self):
 
         obj_1 = BaseModel()
@@ -50,4 +49,8 @@ class TestFileStorage(unittest.TestCase):
             if object_id in key:
                 flag += 1
         self.assertTrue(flag == 1)
-        os.remove('./file.json')
+        
+    def tearDown(self):
+
+        if os.path.exists('file.json'):
+            os.remove('./file.json') 
