@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
         all instances based or not on the class name"""
 
         line_read = line.split(" ")
-        if line_read[0] not in HBNBCommand.class_id.keys():
+        if line_read[0] not in [*HBNBCommand.class_id.keys(), '']:
             print("** class doesn't exist **")
         else:
             list_to_print = []
