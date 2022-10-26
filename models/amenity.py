@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """The class defines the Amenity 
+    """The class defines the Amenity
 
         Public class attributes:
             name (str) - The name of the amenity

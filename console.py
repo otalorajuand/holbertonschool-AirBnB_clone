@@ -90,8 +90,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             list_to_print = []
             for key, value in models.storage._FileStorage__objects.items():
-                if (value.__class__.__name__ in HBNBCommand.class_id.keys()
-                        or line_read == ['']):
+                if (value.__class__.__name__ in HBNBCommand.class_id.keys() or
+                        line_read == ['']):
 
                     list_to_print.append(str(value))
             print(list_to_print)
