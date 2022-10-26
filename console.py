@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ["BaseModel", "User"]:
+        elif line_read[0] not in class_id.keys():
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
@@ -50,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ["BaseModel", "User"]:
+        elif line_read[0] not in class_id.keys():
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
@@ -65,12 +65,12 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances based or not on the class name"""
 
         line_read = line.split(" ")
-        if line_read[0] not in ["BaseModel","", "User"]:
+        if line_read[0] not in class_id.keys():
             print("** class doesn't exist **")
         else:
             list_to_print = []
             for key, value in models.storage._FileStorage__objects.items():
-                if value.__class__.__name__ in ['BaseModel', "User"] or line_read == ['']:
+                if value.__class__.__name__ in class_id.keys() or line_read == ['']:
                     list_to_print.append(str(value))
             print(list_to_print)
 
@@ -80,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(' ')
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ['BaseModel', "User"]:
+        elif line_read[0] not in class_id.keys():
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
