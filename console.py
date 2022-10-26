@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in ["BaseModel", "User"]:
+        elif line_read[0] not in class_id.keys():
             print("** class doesn't exist **")
         else:
             b1 = eval(f"models.{class_id[line_read[0]]}.{line_read[0]}()")
