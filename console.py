@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
         elif line_read[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
         else:
-            b1 = eval(f"models.{class_id[line_read[0]]}{line_read[0]}()")
+            b1 = eval(f"models.{class_id[line_read[0]]}.{line_read[0]}()")
             b1.save()
             print(b1.id)
     
