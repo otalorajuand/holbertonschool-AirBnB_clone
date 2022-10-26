@@ -20,8 +20,9 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all(self):
 
+        obj_1 = BaseModel()
         file_1 = FileStorage()
-        self.assertTrue(file_1._FileStorage__objects == file_1.all())
+        self.assertTrue(file_1.all().get(f"BaseModel.{obj_1.id}"))
 
     def test_new(self):
 
@@ -29,3 +30,9 @@ class TestFileStorage(unittest.TestCase):
         file_1 = FileStorage()
         self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
 
+    def test_save(self):
+
+        obj_1 = BaseModel()
+        file_1 = FileStorage()
+        obj_1.save()
+        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
