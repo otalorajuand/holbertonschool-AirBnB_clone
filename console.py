@@ -7,6 +7,7 @@ import models.base_model
 import models
 import models.user
 
+class_id = {"User":"user", "BaseModel":"base_model"}
 
 class HBNBCommand(cmd.Cmd):
     """This class implements a basic prompt to handle objects
@@ -23,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
         elif line_read[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
         else:
-            b1 = models.base_model.BaseModel()
+            b1 = eval(f"models.{line_read[0]}.{class_id[line_read[0]]}.()")
             b1.save()
             print(b1.id)
     
