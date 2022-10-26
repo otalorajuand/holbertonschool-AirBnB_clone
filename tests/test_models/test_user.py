@@ -11,11 +11,12 @@ import os
 class TestUser(unittest.TestCase):
     
     def test_user_email(self):
+
         user_1 = User()
-        User.email = "otalorajuand@gmail.com"
-        self.assertTrue(User.email == "otalorajuand@gmail.com")
-        self.assertTrue(type(User.email) is str)
-        self.assertTrue(User.__dict__.get('email'))
+        self.assertTrue(hasattr(user_1, 'email'))
+        self.assertEqual(User.email, "")
+        user_1.email = "otalorajuand@gmail.com"
+        self.assertEqual(user_1.email, "otalorajuand@gmail.com") 
 
     def test_user_password(self):
         user_1 = User()
