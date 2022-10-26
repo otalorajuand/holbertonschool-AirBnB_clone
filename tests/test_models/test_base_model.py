@@ -5,6 +5,7 @@ Unittest for class Base
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
+import os
 
 
 class TestBase(unittest.TestCase):
@@ -39,8 +40,11 @@ class TestBase(unittest.TestCase):
 
         base_1 = BaseModel()
         self.assertTrue(type(base_1.created_at) == datetime)
-        
 
+    def tearDown(self):
+
+        if os.path.exists('file.json'):
+            os.remove('file.json')
 
 if __name__ == '__main__':
     unittest.main()

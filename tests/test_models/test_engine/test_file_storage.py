@@ -44,5 +44,9 @@ class TestFileStorage(unittest.TestCase):
         file_1.save()
         file_1._FileStorge__objects = {}
         file_1.reload()
-        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}")))
+        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
+
+    def tearDown(self):
+        if os.path.exists('file.json'):
+            os.remove('file.json')
 
