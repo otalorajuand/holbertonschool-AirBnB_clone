@@ -49,8 +49,10 @@ class TestFileStorage(unittest.TestCase):
             if object_id in key:
                 flag += 1
         self.assertTrue(flag == 1)
-        
+    
+    """
     def tearDown(self):
 
         if os.path.exists('file.json'):
             os.remove('./file.json') 
+    """
