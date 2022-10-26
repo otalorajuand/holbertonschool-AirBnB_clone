@@ -13,8 +13,9 @@ class TestUser(unittest.TestCase):
     def test_user_email(self):
         user_1 = User()
         User.email = "otalorajuand@gmail.com"
-        self.assertTrue(user_1.email == "otalorajuand@gmail.com")
+        self.assertTrue(User.email == "otalorajuand@gmail.com")
         self.assertTrue(type(User.email) is str)
+        self.assertTrue(User.__dict__.get('email'))
 
     def test_user_password(self):
         user_1 = User()
