@@ -22,3 +22,10 @@ class TestFileStorage(unittest.TestCase):
 
         file_1 = FileStorage()
         self.assertTrue(file_1._FileStorage__objects == file_1.all())
+
+    def test_new(self):
+
+        obj_1 = BaseModel()
+        file_1 = FileStorage()
+        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
+
