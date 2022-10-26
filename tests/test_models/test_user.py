@@ -12,5 +12,5 @@ class TestUser(unittest.TestCase):
     
     def test_user_email(self):
         user_1 = User()
-        user_1.email = "otalorajuand@gmail.com"
+        User.email = "otalorajuand@gmail.com"
         self.assertTrue(user_1.email == "otalorajuand@gmail.com")
