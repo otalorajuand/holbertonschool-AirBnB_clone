@@ -54,8 +54,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-        conct = line_read[0] + "." + line_read[1]
-        if not models.storage._FileStorage__objects.get(conct):
+        elif not models.storage._FileStorage__objects.get(conct := line_read[0]
+                                                          + "." +
+                                                          line_read[1]):
             print("** no instance found **")
         else:
             obj = models.storage._FileStorage__objects[conct]
@@ -71,9 +72,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-
-        conct = line_read[0] + "." + line_read[1]
-        if not models.storage._FileStorage__objects.get(conct):
+        elif not models.storage._FileStorage__objects.get(conct := line_read[0]
+                                                          + "." +
+                                                          line_read[1]):
             print("** no instance found **")
 
         else:
@@ -107,14 +108,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-        conct = line_read[0] + "." + line_read[1]
-        if not models.storage._FileStorage__objects.get(conct):
+        elif not models.storage._FileStorage__objects.get(conct := line_read[0]
+                                                          + "." +
+                                                          line_read[1]):
             print("** no instance found **")
         elif len(line_read) < 3:
             print("** attribute name missing **")
         elif len(line_read) < 4:
             print("** value missing **")
-
         else:
             obj = models.storage._FileStorage__objects[conct]
             setattr(obj, line_read[2], eval(line_read[3]))
