@@ -101,6 +101,6 @@ class TestPlace(unittest.TestCase):
 
         place_1 = Place()
         self.assertTrue(hasattr(place_1, 'amenity_ids'))
-        self.assertEqual(place_1.amenity_ids, "")
-        place_1.amenity_ids = "excelent"
-        self.assertEqual(place_1.amenity_ids, "excelent")
+        self.assertEqual(place_1.amenity_ids, [])
+        place_1.amenity_ids = ["1", "2", "3"]
+        self.assertEqual(place_1.amenity_ids, ["1", "2", "3"])

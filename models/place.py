@@ -32,4 +32,4 @@ class Place(BaseModel):
     price_by_night = 0
     latitude = float(0)
     longitude = float(0)
-    amenity_ids = ""
+    amenity_ids = []
