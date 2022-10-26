@@ -11,9 +11,10 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
 
-    __file_path= "file.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
@@ -26,25 +27,24 @@ class FileStorage:
 
         dict_key = f"{obj.__class__.__name__}.{obj.id}"
         FileStorage.__objects[dict_key] = obj
-    
+
     def save(self):
         """serializes __objects to the JSON file"""
 
         aux_dict = {key: value.to_dict() for key, value in self.all().items()}
- 
 
-        with open(FileStorage.__file_path, mode ="w+", encoding="utf-8") as f:
+        with open(FileStorage.__file_path, mode="w+", encoding="utf-8") as f:
             f.write(json.dumps(aux_dict))
-    
+
     def reload(self):
         """deserializes the JSON file
         to __objects (only if the JSON file (__file_path) exists
          ; otherwise, do nothing"""
-        
+
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 str_read = f.read()
-            
+
             python_obj = json.loads(str_read)
             FileStorage.__objects = {k: eval(f"{v['__class__']}(**{v})")
-                                    for k, v in python_obj.items()}
+                                     for k, v in python_obj.items()}
