@@ -19,8 +19,14 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-    class_id = {"User":"user", "BaseModel":"base_model", "State": "state", "City": "city",
-            "Amenity":"amenity", "Place":"place", "Review":"review"}
+    class_id = {
+        "User": "user",
+        "BaseModel": "base_model",
+        "State": "state",
+        "City": "city",
+        "Amenity": "amenity",
+        "Place": "place",
+        "Review": "review"}
 
     def do_create(self, line):
         """ Creates a new instance of BaseModel"""
@@ -31,12 +37,15 @@ class HBNBCommand(cmd.Cmd):
         elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
         else:
-            b1 = eval(f"models.{HBNBCommand.class_id[line_read[0]]}.{line_read[0]}()")
+            module = HBNBCommand.class_id[line_read[0]]
+            b1 = eval(
+                f"models.{module}.{line_read[0]}()")
             b1.save()
             print(b1.id)
-    
+
     def do_show(self, line):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation of an
+            instance based on the class name and id"""
 
         line_read = line.split(" ")
         if line_read == ['']:
@@ -45,12 +54,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-        elif not models.storage._FileStorage__objects.get(conct := line_read[0] + "." + line_read[1]):
+        conct = line_read[0] + "." + line_read[1]
+        if not models.storage._FileStorage__objects.get(conct):
             print("** no instance found **")
         else:
             obj = models.storage._FileStorage__objects[conct]
             print(obj)
-            
+
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
 
@@ -61,7 +71,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-        elif not models.storage._FileStorage__objects.get(conct := line_read[0] + "." + line_read[1]):
+
+        conct = line_read[0] + "." + line_read[1]
+        if not models.storage._FileStorage__objects.get(conct):
             print("** no instance found **")
 
         else:
@@ -69,7 +81,8 @@ class HBNBCommand(cmd.Cmd):
             models.storage.save()
 
     def do_all(self, line):
-        """Prints all string representation of all instances based or not on the class name"""
+        """Prints all string representation of
+        all instances based or not on the class name"""
 
         line_read = line.split(" ")
         if line_read[0] not in HBNBCommand.class_id.keys():
@@ -77,12 +90,15 @@ class HBNBCommand(cmd.Cmd):
         else:
             list_to_print = []
             for key, value in models.storage._FileStorage__objects.items():
-                if value.__class__.__name__ in HBNBCommand.class_id.keys() or line_read == ['']:
+                if (value.__class__.__name__ in HBNBCommand.class_id.keys()
+                        or line_read == ['']):
+
                     list_to_print.append(str(value))
             print(list_to_print)
 
     def do_update(self, line):
-        """ Updates an instance based on the class name and id by adding or updating attribute """
+        """ Updates an instance based on the class
+            name and id by adding or updating attribute """
 
         line_read = line.split(' ')
         if line_read == ['']:
@@ -91,7 +107,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
-        elif not models.storage._FileStorage__objects.get(conct := line_read[0] + "." + line_read[1]):
+        conct = line_read[0] + "." + line_read[1]
+        if not models.storage._FileStorage__objects.get(conct):
             print("** no instance found **")
         elif len(line_read) < 3:
             print("** attribute name missing **")
@@ -112,7 +129,6 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
-    
 
 
 if __name__ == '__main__':
