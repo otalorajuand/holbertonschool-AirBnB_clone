@@ -6,8 +6,12 @@ import cmd
 import models.base_model
 import models
 import models.user
+import models.city
+import models.state
+import models.amenity
+import models.place
+import models.review
 
-class_id = {"User":"user", "BaseModel":"base_model"}
 
 class HBNBCommand(cmd.Cmd):
     """This class implements a basic prompt to handle objects
@@ -15,16 +19,19 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
+    class_id = {"User":"user", "BaseModel":"base_model", "State": "state", "City": "city",
+            "Amenity":"amenity", "Place":"place", "Review":"review"}
+
     def do_create(self, line):
         """ Creates a new instance of BaseModel"""
 
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in class_id.keys():
+        elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
         else:
-            b1 = eval(f"models.{class_id[line_read[0]]}.{line_read[0]}()")
+            b1 = eval(f"models.{HBNBCommand.class_id[line_read[0]]}.{line_read[0]}()")
             b1.save()
             print(b1.id)
     
@@ -34,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in class_id.keys():
+        elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
@@ -50,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in class_id.keys():
+        elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
@@ -65,12 +72,12 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances based or not on the class name"""
 
         line_read = line.split(" ")
-        if line_read[0] not in class_id.keys():
+        if line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
         else:
             list_to_print = []
             for key, value in models.storage._FileStorage__objects.items():
-                if value.__class__.__name__ in class_id.keys() or line_read == ['']:
+                if value.__class__.__name__ in HBNBCommand.class_id.keys() or line_read == ['']:
                     list_to_print.append(str(value))
             print(list_to_print)
 
@@ -80,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(' ')
         if line_read == ['']:
             print("** class name missing **")
-        elif line_read[0] not in class_id.keys():
+        elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
         elif len(line_read) < 2:
             print("** instance id missing **")
