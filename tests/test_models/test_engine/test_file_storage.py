@@ -36,6 +36,7 @@ class TestFileStorage(unittest.TestCase):
         file_1.save()
         self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
 
+    """
     def test_reload(self):
 
         obj_1 = BaseModel()
@@ -50,7 +51,7 @@ class TestFileStorage(unittest.TestCase):
                 flag += 1
         self.assertTrue(flag == 1)
     
-    """
+    
     def tearDown(self):
 
         if os.path.exists('file.json'):
