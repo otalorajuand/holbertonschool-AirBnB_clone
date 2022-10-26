@@ -28,6 +28,6 @@ class Place(BaseModel):
     number_bathrooms = 0
     max_guest = 0
     price_by_night = 0
-    latitude = f"{0:.1f}"
-    longitude = f"{0:.1f}"
+    latitude = float(0)
+    longitude = float(0)
     amenity_ids = ""
