@@ -30,12 +30,29 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
 
 
-    def test_save(self):
+    '''def test_save(self):
 
         file_1 = FileStorage()
         obj_1 = BaseModel()
         obj_1.save()
         self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
+    '''
+    
+    def test_reload(self):
+        """
+        Tests method: reload (reloads objects from string file)
+        """
+        a_storage = FileStorage()
+        try:
+            os.remove("file.json")
+        except:
+            pass
+        with open("file.json", "w") as f:
+            f.write("{}")
+        with open("file.json", "r") as r:
+            for line in r:
+                self.assertEqual(line, "{}")
+        self.assertIs(a_storage.reload(), None)
 
     '''
     def test_reload(self):
