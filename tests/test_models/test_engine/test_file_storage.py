@@ -12,7 +12,7 @@ import models
 
 class TestFileStorage(unittest.TestCase):
 
-    def test_file_path(self):
+    '''def test_file_path(self):
 
         file_1 = FileStorage()
         self.assertTrue(file_1._FileStorage__file_path == 'file.json')
@@ -35,7 +35,7 @@ class TestFileStorage(unittest.TestCase):
         obj_1 = BaseModel()
         file_1 = FileStorage()
         file_1.save()
-        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
+        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))'''
 
     
     def test_reload(self):
