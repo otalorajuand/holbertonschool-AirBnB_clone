@@ -32,9 +32,9 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
 
-        obj_1 = BaseModel()
         file_1 = FileStorage()
-        file_1.save()
+        obj_1 = BaseModel()
+        obj_1.save()
         self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
 
     '''
