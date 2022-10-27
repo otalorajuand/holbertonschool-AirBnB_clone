@@ -150,9 +150,22 @@ class HBNBCommand(cmd.Cmd):
             object_id = splitted_args[1].replace("destroy(", "")[:-1]
             self.do_destroy(splitted_args[0] + " " + object_id)
         elif re.search("update()", splitted_args[1]):
+           
             object_args = splitted_args[1].replace("update(", "")[:-1]
-            object_args = object_args.replace(",", "")
-            self.do_update(splitted_args[0] + " " + object_args)
+            args = object_args.split(", ", 1)
+
+            if len(args) < 2:
+                print("** usage: <class name>.update(<id>, <attribute name>, <attribute value>)")
+            elif "{" in args[1] and "}" in args[1] and ":" in args[1]:
+                dict_args = eval(args[1])
+                for key, value in dict_args.items():
+                    if type(value) is str:
+                        self.do_update(f"{splitted_args[0]} {args[0]} {key} \"{value}\"")
+                    else:
+                        self.do_update(f"{splitted_args[0]} {args[0]} {key} {value}")
+            else:
+                object_args = object_args.replace(",", "")
+                self.do_update(splitted_args[0] + " " + object_args)
 
     def do_EOF(self, line):
         return True
