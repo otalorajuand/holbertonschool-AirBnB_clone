@@ -142,7 +142,6 @@ class HBNBCommand(cmd.Cmd):
             classes = models.storage._FileStorage__objects.items()
             print(len([k for k, v in classes
                        if v.__class__.__name__ == splitted_args[0]]))
-         
         elif re.search("show()", splitted_args[1]):
             object_id = splitted_args[1].replace("show(", "")[:-1]
             self.do_show(splitted_args[0] + " " + object_id)
@@ -150,6 +149,10 @@ class HBNBCommand(cmd.Cmd):
         elif re.search("destroy()", splitted_args[1]):
             object_id = splitted_args[1].replace("destroy(", "")[:-1]
             self.do_destroy(splitted_args[0] + " " + object_id)
+        elif re.search("update()", splitted_args[1]):
+            object_args = splitted_args[1].replace("update(", "")[:-1]
+            object_args = object_args.replace(",", "")
+            self.do_update(splitted_args[0] + " " + object_args)
 
     def do_EOF(self, line):
         return True
