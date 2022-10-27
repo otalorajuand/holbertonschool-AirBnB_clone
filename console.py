@@ -97,9 +97,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             list_to_print = []
             for key, value in models.storage._FileStorage__objects.items():
-                if (value.__class__.__name__ in HBNBCommand.class_id.keys() or
+                if (value.__class__.__name__ == line_read[0] or
                         line_read == ['']):
-
                     list_to_print.append(str(value))
             print(list_to_print)
 
@@ -129,6 +128,16 @@ class HBNBCommand(cmd.Cmd):
             obj = models.storage._FileStorage__objects[conct]
             setattr(obj, line_read[2], eval(line_read[3]))
 
+    def default(self, *args):
+        splitted_args = args[0].split('.')
+        if splitted_args[1] == "all()":
+            self.do_all(f'{splitted_args[0]}')
+        elif splitted_args[1] == "count()":
+
+            classes = models.storage._FileStorage__objects.items()
+            print(len([k for k, v in classes
+                       if v.__class__.__name__ == splitted_args[0]]))
+          
     def do_EOF(self, line):
         return True
 
