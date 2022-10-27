@@ -9,10 +9,26 @@ from datetime import datetime
 import os
 import models
 
-
 class TestFileStorage(unittest.TestCase):
 
-    def test_file_path(self):
+    @classmethod
+    def setUpClass(cls):
+        cls.rev1 = BaseModel()
+        cls.rev1.place_id = "Raleigh"
+        cls.rev1.user_id = "Greg"
+        cls.rev1.text = "Grade A"
+
+    @classmethod
+    def teardown(cls):
+        del cls.rev1
+
+    def teardown(self):
+        try:
+            os.remove("file.json")
+        except:
+            pass
+
+    ''''def test_file_path(self):
 
         file_1 = FileStorage()
         self.assertTrue(file_1._FileStorage__file_path == 'file.json')
@@ -27,7 +43,8 @@ class TestFileStorage(unittest.TestCase):
 
         obj_1 = BaseModel()
         file_1 = FileStorage()
-        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
+        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))'''
+
 
 
     '''def test_save(self):
@@ -37,7 +54,31 @@ class TestFileStorage(unittest.TestCase):
         obj_1.save()
         self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
     '''
-    
+
+    def test_all(self):
+        """
+        Tests method: all (returns dictionary <class>.<id> : <obj instance>)
+        """
+        storage = FileStorage()
+        instances_dic = storage.all()
+        self.assertIsNotNone(instances_dic)
+        self.assertEqual(type(instances_dic), dict)
+        self.assertIs(instances_dic, storage._FileStorage__objects)
+
+    def test_new(self):
+        """
+        Tests method: new (saves new object into dictionary)
+        """
+        m_storage = FileStorage()
+        instances_dic = m_storage.all()
+        melissa = BaseModel()
+        melissa.id = 999999
+        melissa.name = "Melissa"
+        m_storage.new(melissa)
+        key = melissa.__class__.__name__ + "." + str(melissa.id)
+        #print(instances_dic[key])
+        self.assertIsNotNone(instances_dic[key])
+
     def test_reload(self):
         """
         Tests method: reload (reloads objects from string file)
@@ -53,6 +94,7 @@ class TestFileStorage(unittest.TestCase):
             for line in r:
                 self.assertEqual(line, "{}")
         self.assertIs(a_storage.reload(), None)
+
 
     '''
     def test_reload(self):
