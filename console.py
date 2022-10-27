@@ -147,6 +147,10 @@ class HBNBCommand(cmd.Cmd):
             object_id = splitted_args[1].replace("show(", "")[:-1]
             self.do_show(splitted_args[0] + " " + object_id)
 
+        elif re.search("destroy()", splitted_args[1]):
+            object_id = splitted_args[1].replace("destroy(", "")[:-1]
+            self.do_destroy(splitted_args[0] + " " + object_id)
+
     def do_EOF(self, line):
         return True
 
