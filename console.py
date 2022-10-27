@@ -50,13 +50,16 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
+            return
         elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
+            return
         elif len(line_read) < 2:
             print("** instance id missing **")
-        elif not models.storage._FileStorage__objects.get(conct := line_read[0]
-                                                          + "." +
-                                                          line_read[1]):
+            return
+
+        cont = line_read[0] + "." + line_read[1])
+        if not models.storage._FileStorage__objects.get(conct):
             print("** no instance found **")
         else:
             obj = models.storage._FileStorage__objects[conct]
@@ -68,13 +71,16 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(" ")
         if line_read == ['']:
             print("** class name missing **")
+            return
         elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
+            return
         elif len(line_read) < 2:
             print("** instance id missing **")
-        elif not models.storage._FileStorage__objects.get(conct := line_read[0]
-                                                          + "." +
-                                                          line_read[1]):
+            return
+
+        conct = line_read[0] + "." + line_read[1])
+        if not models.storage._FileStorage__objects.get(conct):
             print("** no instance found **")
 
         else:
@@ -104,13 +110,16 @@ class HBNBCommand(cmd.Cmd):
         line_read = line.split(' ')
         if line_read == ['']:
             print("** class name missing **")
+            return
         elif line_read[0] not in HBNBCommand.class_id.keys():
             print("** class doesn't exist **")
+            return
         elif len(line_read) < 2:
             print("** instance id missing **")
-        elif not models.storage._FileStorage__objects.get(conct := line_read[0]
-                                                          + "." +
-                                                          line_read[1]):
+            return
+
+        conct = line_read[0] + "." + line_read[1])
+        if not models.storage._FileStorage__objects.get(conct):
             print("** no instance found **")
         elif len(line_read) < 3:
             print("** attribute name missing **")
