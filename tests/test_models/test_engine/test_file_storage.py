@@ -35,7 +35,7 @@ class TestFileStorage(unittest.TestCase):
         obj_1 = BaseModel()
         file_1 = FileStorage()
         file_1.save()
-        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))'''
+        self.assertTrue(file_1._FileStorage__objects.get(f"BaseModel.{obj_1.id}"))
 
     
     def test_reload(self):
@@ -52,9 +52,9 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as r:
             for line in r:
                 self.assertEqual(line, "{}")
-        self.assertIs(a_storage.reload(), None)
+        self.assertIs(a_storage.reload(), None)'''
 
-    """
+    
     def test_reload(self):
 
         obj_1 = BaseModel()
@@ -74,4 +74,4 @@ class TestFileStorage(unittest.TestCase):
 
         if os.path.exists('file.json'):
             os.remove('./file.json') 
-    """
+    
