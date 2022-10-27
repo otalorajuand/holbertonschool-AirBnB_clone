@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        cont = line_read[0] + "." + line_read[1]
+        conct = line_read[0] + "." + line_read[1]
         if not models.storage._FileStorage__objects.get(conct):
             print("** no instance found **")
         else:
