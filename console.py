@@ -11,6 +11,7 @@ import models.state
 import models.amenity
 import models.place
 import models.review
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -130,6 +131,10 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, *args):
         splitted_args = args[0].split('.')
+        if len(splitted_args) < 2:
+            print("** incorrect command **")
+            return
+
         if splitted_args[1] == "all()":
             self.do_all(f'{splitted_args[0]}')
         elif splitted_args[1] == "count()":
@@ -137,7 +142,11 @@ class HBNBCommand(cmd.Cmd):
             classes = models.storage._FileStorage__objects.items()
             print(len([k for k, v in classes
                        if v.__class__.__name__ == splitted_args[0]]))
-          
+         
+        elif re.search("show()", splitted_args[1]):
+            object_id = splitted_args[1].replace("show(", "")[:-1]
+            self.do_show(splitted_args[0] + " " + object_id)
+
     def do_EOF(self, line):
         return True
 
