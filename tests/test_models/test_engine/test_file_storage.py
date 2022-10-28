@@ -6,9 +6,7 @@ import json
 import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-from datetime import datetime
 import os
-import models
 
 
 class TestFileStorage(unittest.TestCase):
@@ -36,19 +34,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(self.file_1._FileStorage__objects.get(
             f"BaseModel.{self.obj_1.id}"))
 
-    '''def test_reload(self):
-
-        self.obj_1 = BaseModel()
-        self.obj_1.save()
-        self.file_1._FileStorage__objects = {}
-        self.assertFalse(f"BaseModel.{self.obj_1.id}"
-        in self.file_1._FileStorage__objects)
-        self.file_1.reload()
-        print(self.file_1._FileStorage__objects)
-        self.assertTrue(f"BaseModel.{self.obj_1.id}" in
-        self.file_1._FileStorage__objects)
-    '''
-
     def test_reload(self):
         if os.path.exists('file.json'):
             with open('file.json', mode="r") as f:
@@ -60,9 +45,7 @@ class TestFileStorage(unittest.TestCase):
                               self.file_1._FileStorage__objects)
 
         else:
-
             self.file_1.reload()
-            print(self.file_1._FileStorage__objects)
             self.assertEqual(len(self.file_1._FileStorage__objects), 0)
 
 
