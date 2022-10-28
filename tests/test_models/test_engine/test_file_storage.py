@@ -37,7 +37,7 @@ class TestFileStorage(unittest.TestCase):
     def test_reload(self):
         if os.path.exists('file.json'):
             with open('file.json', mode="r") as f:
-                json_obj = json.dumps(f.read())
+                json_obj = json.loads(f.read())
 
             self.file_1.reload()
             for value in json_obj.values():
