@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """this module contains the class Place
 that inherits from class BaseModel"""
-
 from models.base_model import BaseModel
 
 

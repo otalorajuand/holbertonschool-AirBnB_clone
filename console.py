@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             list_to_print = []
-            for key, value in models.storage._FileStorage__objects.items():
+            for value in models.storage._FileStorage__objects.values():
                 if (value.__class__.__name__ == line_read[0] or
                         line_read == ['']):
                     list_to_print.append(str(value))
@@ -173,7 +173,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
-        quit()
         return True
 
     def emptyline(self):
