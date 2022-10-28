@@ -22,7 +22,7 @@ the command interpreter reads the next commands:
 
 ## how to start it
 
-```bash
+```console
 ./console.py
 (hbnb)
 ```
