@@ -35,7 +35,7 @@ class TestFileStorage(unittest.TestCase):
             f"BaseModel.{self.obj_1.id}"))
 
     def test_reload(self):
-        if os.path.exists('file.json'):
+        """if os.path.exists('file.json'):
             with open('file.json', mode="r") as f:
                 json_obj = json.loads(f.read())
 
@@ -44,7 +44,8 @@ class TestFileStorage(unittest.TestCase):
                 self.assertIn(f"{value['__class__']}.{value['id']}",
                               self.file_1._FileStorage__objects)
 
-        else:
+        """
+        if os.path.exists('file.json'):
             self.file_1.reload()
             self.assertEqual(len(self.file_1._FileStorage__objects), 0)
 
