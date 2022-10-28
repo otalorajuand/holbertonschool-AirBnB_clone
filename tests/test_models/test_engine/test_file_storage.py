@@ -22,6 +22,7 @@ class TestFileStorage(unittest.TestCase):
         if os.path.exists('file.json'):
             os.remove('file.json')
 
+
     def test_file_path(self):
 
         self.assertTrue(self.file_1._FileStorage__file_path == 'file.json')
@@ -64,10 +65,10 @@ class TestFileStorage(unittest.TestCase):
                 self.assertIn(f"{value['__class__']}.{value['id']}",
                               self.file_1._FileStorage__objects)
 
-        else:
+        """else:
             self.file_1.reload()
-            self.file_1._FileStorage__objects = {}
-            self.assertEqual(len(self.file_1._FileStorage__objects), 0)
+            print(self.file_1._FileStorage__objects)
+            self.assertEqual(len(self.file_1._FileStorage__objects), 0)"""
 
 
 if __name__ == '__main__':
