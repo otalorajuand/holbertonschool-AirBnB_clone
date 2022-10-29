@@ -42,7 +42,7 @@ Quit command to exit the program
 (hbnb) quit
 ```
 
-```bash
+```
 (hbnb) all MyModel
 ** class doesn't exist **
 (hbnb) show BaseModel
